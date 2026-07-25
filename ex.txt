@@ -1,6 +1,0 @@
-1. Maior ou menor de idade
-
-Peça a idade do usuário:
-
-se for maior ou igual a 18 → “Maior de idade”
-senão → “Menor de idade”
