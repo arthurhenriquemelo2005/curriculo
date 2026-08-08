@@ -1,85 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu curriculo</title>
+    <title>Meu Currículo - Arthur Ribeiro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <h1>Arthur Ribeiro</h1>
-        <h2>Desenvolvedor Backend em Formação </h2>
-        <addres>
-            <p>
-                Email: arthurhenriquemelo2005@gmail.com <br>
-                Contato: (81) 998393212 <br>
-                Localização: Recife - PE
-            </p>
-        </addres>
-    </header>
-            <hr>
-            <main>
-                <section>
-                    <h3>Quem eu sou? </h3>
-                    <p>
-                        Sou estudante de desenvolvimento de sistemas com grande interesse em Engenharia de Software, dedicado ao
-                        aprendizado dos fundamentos da
-                        computação, arquitetura de software e desenvolvimento de sistemas. Busco evoluir continuamente por meio
-                        de
-                        estudos e projetos práticos, com foco na construção de soluções bem estruturadas.
-                    </p>
-                </section>
-
-                <section>
-                    <h3>Tecnologias</h3>
-                    <article>
-                        <ul>
-                            <li>C#</li>
-                            <li>SQL</li>
-                            <li>.NET</li>
-                            <li>HTML</li>
-                            <li>CSS</li>
-                            <li>Node.js</li>
-                        </ul>
-                    </article>
-                </section>
-
-                <section>
-                    <h3>Projetos</h3>
-                    <article>
-                        <ul>
-                            <li><strong>Sistema de Barbearia</strong><br>
-                                Sistema para gerenciar clientes,serviços e agendamentos.</li>
-                            <br>
-                            <li><strong>Sistema Login</strong><br>
-                                Validações de usuários</li><br>
-                            <li><strong>Projeto de computação em borda</strong><br>
-                                Voltado para computação em borda <strong>OT</strong> e <strong>IT</strong>, projeto
-                                realizado para as máquinas da monitron </li>
-                        </ul>
-                    </article>
-                </section>
-                
-                <section>
-                    <h2>Formação</h2>
-                    <article>
-                        <p><strong>Técnico em desenvolvimento de sistemas</strong> - <em>Andamento</em></p>
-                    </article>
-                </section>
-            </main>
+        <!-- Container adicionado para organizar a foto e os dados lado a lado -->
+        <div class="perfil-container">
+            <!-- Substitua "sua-foto-aqui.jpg" pelo caminho real da sua foto -->
+            <img src="atividadeCurriculo(1).jpeg" alt="Foto de perfil de Arthur Ribeiro" class="foto-perfil">
             
-            <section>
-                <h3>Onde me encontrar</h3>
-                <nav>
-                    <footer>
-                        <ul>
-                            <li><a href="https://github.com/arthurhenriquemelo2005">GitHub</a></li>
-                            <li><a href="https://www.linkedin.com/in/arthur-ribeiro-0b1bb6388/">LinkedIn</a></li>
-                        </ul>
-                    </footer>
-                </nav>
-            </section>
+            <div class="info-perfil">
+                <h1>Arthur Ribeiro</h1>
+                <h2>Desenvolvedor Backend em Formação</h2>
+                <address>
+                    <p>
+                        Email: arthurhenriquemelo2005@gmail.com <br>
+                        Contato: (81) 998393212 <br>
+                        Localização: Recife - PE
+                    </p>
+                </address>
+            </div>
+        </div>
+    </header>
+    
+    <hr>
+    
+    <main>
+        <section>
+            <h3>Quem eu sou?</h3>
+            <p>
+                Sou estudante de desenvolvimento de sistemas com grande interesse em Engenharia de Software, dedicado ao aprendizado dos fundamentos da computação, arquitetura de software e desenvolvimento de sistemas. Busco evoluir continuamente por meio de estudos e projetos práticos, com foco na construção de soluções bem estruturadas.
+            </p>
+        </section>
+
+        <section>
+            <h3>Tecnologias</h3>
+            <article>
+                <ul>
+                    <li>C# / .NET</li>
+                    <li>Typescript</li>
+                    <li>Node.js</li>
+                    <li>SQL (MySQL)</li>
+                    <li>HTML / CSS</li>
+                </ul>
+            </article>
+        </section>
+
+        <section>
+            <h3>Projetos</h3>
+            <article>
+                <ul>
+                    <li><strong>Sistema de Barbearia</strong><br>
+                        Sistema em camadas para gerenciar clientes, serviços e agendamentos.</li>
+                    <br>
+                    <li><strong>Sistema de Pet Shop</strong><br>
+                        Desenvolvimento de CRUD e lógica de banco de dados para cadastro de clientes, pets e serviços.</li>
+                    <br>
+                    <li><strong>Sistema Login</strong><br>
+                        Validações e autenticação de usuários.</li>
+                    <br>
+                    <li><strong>Projeto de Computação em Borda</strong><br>
+                        Voltado para computação em borda <strong>OT</strong> e <strong>IT</strong>, projeto realizado para as máquinas da <strong>Monitron</strong>.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section>
+            <h2>Formação e Metodologia</h2>
+            <article>
+                <p><strong>Técnico em Desenvolvimento de Sistemas</strong> - <em>Andamento</em></p>
+                <p><strong>Tascom Academy: Desenvolvimento de Sistemas</strong> - <em>Andamento</em></p>
+                <br>
+                <p><strong>Perfil de Estudo:</strong> Autodidata, com foco em leitura teórica para compreensão profunda e prática guiada para fixação de sintaxe.</p>
+            </article>
+        </section>
+    </main>
+
+    <section>
+        <h3>Onde me encontrar</h3>
+        <nav>
+            <footer>
+                <ul>
+                    <li><a href="https://github.com/arthurhenriquemelo2005" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/arthur-ribeiro-0b1bb6388/" target="_blank">LinkedIn</a></li>
+                </ul>
+            </footer>
+        </nav>
+    </section>
 
 </body>
+
 </html>
