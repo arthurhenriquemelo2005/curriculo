@@ -1,19 +1,31 @@
 
+/* ========================================
+   1. VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
+======================================== */
 
 :root {
-    --fundo: #0b1120;
-    --fundo-card: #111c30;
-    --fundo-hover: #172943;
+    --bg: #080d19;
+    --bg-secondary: #0d1526;
+    --surface: #111c30;
+    --surface-hover: #16243b;
 
-    --azul: #38bdf8;
-    --azul-hover: #7dd3fc;
+    --primary: #38bdf8;
+    --primary-hover: #7dd3fc;
+    --primary-soft: rgba(56, 189, 248, 0.10);
 
-    --texto: #e2e8f0;
-    --texto-secundario: #94a3b8;
-    --borda: rgba(56, 189, 248, 0.2);
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --heading: #f8fafc;
 
-    --raio: 12px;
-    --transicao: 0.25s ease;
+    --border: rgba(148, 163, 184, 0.14);
+    --border-accent: rgba(56, 189, 248, 0.35);
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+
+    --container: 1080px;
+    --transition: 220ms ease;
 }
 
 * {
@@ -27,64 +39,127 @@ html {
 }
 
 body {
+    position: relative;
+    isolation: isolate;
+
+    width: min(100% - 48px, var(--container));
+    margin-inline: auto;
+    padding: 36px 0 24px;
+
+    background: var(--bg);
+    color: var(--text);
+
     font-family: "Segoe UI", Arial, sans-serif;
-    background: var(--fundo);
-    color: var(--texto);
-
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 32px;
-
-    line-height: 1.75;
     font-size: 16px;
+    line-height: 1.75;
+
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
+/* Brilho decorativo no fundo */
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -220px;
+    right: -180px;
+    z-index: -1;
+
+    width: 520px;
+    height: 520px;
+
+    background: radial-gradient(
+        circle,
+        rgba(14, 165, 233, 0.10),
+        transparent 70%
+    );
+
+    pointer-events: none;
+}
+
+/* ========================================
+   2. CABEÇALHO / APRESENTAÇÃO
+======================================== */
 
 header {
-    padding: 48px 0 42px;
+    position: relative;
+    overflow: hidden;
+
+    padding: 48px;
+    background: linear-gradient(
+        135deg,
+        #111e34 0%,
+        #0d1526 65%,
+        #101e33 100%
+    );
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 48px;
+
+    width: 90px;
+    height: 3px;
+
+    background: var(--primary);
+    border-radius: 0 0 5px 5px;
 }
 
 .perfil-container {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 34px;
 }
 
 .foto-perfil {
-    width: 145px;
-    height: 145px;
-    min-width: 145px;
+    display: block;
+    flex-shrink: 0;
+
+    width: 150px;
+    height: 150px;
 
     object-fit: cover;
+    object-position: center;
+
     border-radius: 50%;
+    border: 3px solid var(--primary);
+    padding: 5px;
 
-    border: 3px solid var(--azul);
-    padding: 4px;
-
-    background: var(--fundo-card);
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.12);
+    background: var(--bg);
+    box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.06);
 }
 
 .info-perfil {
-    border-left: 3px solid var(--azul);
-    padding-left: 26px;
+    min-width: 0;
+    padding-left: 28px;
+    border-left: 2px solid var(--border-accent);
 }
 
 h1 {
-    color: #f8fafc;
-    font-size: clamp(32px, 5vw, 44px);
-    font-weight: 750;
-    line-height: 1.2;
-    letter-spacing: -1px;
     margin-bottom: 8px;
+
+    color: var(--heading);
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
 }
 
 h2 {
-    color: var(--azul);
-    font-size: 21px;
+    margin-bottom: 20px;
+
+    color: var(--primary);
+    font-size: clamp(18px, 2.5vw, 22px);
     font-weight: 600;
-    margin-bottom: 18px;
+    line-height: 1.4;
 }
 
 address {
@@ -92,28 +167,43 @@ address {
 }
 
 address p {
-    color: var(--texto-secundario);
-    line-height: 1.9;
+    color: var(--text-muted);
     font-size: 14px;
+    line-height: 2;
+    overflow-wrap: anywhere;
 }
 
+/* ========================================
+   3. DIVISÓRIA
+======================================== */
 
 hr {
-    border: none;
+    width: 100%;
     height: 1px;
-    background: linear-gradient(
-        to right,
-        var(--azul),
-        rgba(56, 189, 248, 0.05)
-    );
 
-    margin-bottom: 55px;
+    margin: 34px 0 44px;
+
+    border: 0;
+    background: linear-gradient(
+        90deg,
+        var(--border-accent),
+        var(--border),
+        transparent
+    );
 }
 
+/* ========================================
+   4. SEÇÕES PRINCIPAIS
+======================================== */
 
+main > section,
+body > section {
+    margin-bottom: 28px;
+    padding: 32px;
 
-section {
-    margin-bottom: 55px;
+    background: rgba(13, 21, 38, 0.82);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
 }
 
 h3 {
@@ -121,141 +211,237 @@ h3 {
     align-items: center;
     gap: 12px;
 
-    color: var(--azul);
+    margin-bottom: 22px;
+
+    color: var(--heading);
     font-size: 23px;
     font-weight: 700;
-
-    margin-bottom: 22px;
+    line-height: 1.4;
+    letter-spacing: -0.4px;
 }
 
 h3::before {
     content: "";
-    display: inline-block;
 
     width: 4px;
     height: 25px;
+    flex-shrink: 0;
 
-    background: var(--azul);
+    background: var(--primary);
     border-radius: 5px;
 }
 
 main p {
     max-width: 850px;
-    color: var(--texto);
+    color: var(--text-muted);
 }
 
-section p + p {
-    margin-top: 10px;
+/* Texto de apresentação */
+
+main > section:first-child p {
+    color: #bdc9da;
+    font-size: 16px;
+    line-height: 1.95;
 }
 
+/* ========================================
+   5. TECNOLOGIAS
+   Usa a segunda seção do main
+======================================== */
 
-section ul {
-    padding-left: 22px;
+main > section:nth-of-type(2) article > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    padding: 0;
+    list-style: none;
 }
 
-section li {
-    margin-bottom: 12px;
-    padding-left: 4px;
-    color: var(--texto);
-}
+main > section:nth-of-type(2) article > ul > li {
+    margin: 0;
+    padding: 8px 15px;
 
-section li::marker {
-    color: var(--azul);
-}
+    color: #c8eaff;
+    background: var(--primary-soft);
 
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-sm);
 
-
-.projetos {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.projeto {
-    min-width: 0;
-    padding: 26px;
-
-    background: var(--fundo-card);
-    border: 1px solid var(--borda);
-    border-radius: var(--raio);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
 
     transition:
-        transform var(--transicao),
-        background-color var(--transicao),
-        border-color var(--transicao),
-        box-shadow var(--transicao);
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
 }
 
-.projeto h4 {
-    color: var(--azul);
-    font-size: 19px;
-    line-height: 1.4;
-    margin-bottom: 12px;
+main > section:nth-of-type(2) article > ul > li:hover {
+    background: rgba(56, 189, 248, 0.16);
+    border-color: var(--primary);
+    transform: translateY(-2px);
 }
 
-.projeto p {
-    color: var(--texto-secundario);
-    font-size: 15px;
+/* ========================================
+   6. PROJETOS
+   Usa a terceira seção do main
+======================================== */
+
+main > section:nth-of-type(3) article > ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+
+    padding: 0;
+    list-style: none;
 }
 
-.projeto:hover {
+/* Remove as quebras de linha colocadas
+   entre os itens da lista de projetos */
+
+main > section:nth-of-type(3) article > ul > br {
+    display: none;
+}
+
+main > section:nth-of-type(3) article > ul > li {
+    min-width: 0;
+    margin: 0;
+    padding: 24px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.85;
+
+    overflow-wrap: anywhere;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+main > section:nth-of-type(3) article > ul > li:hover {
     transform: translateY(-4px);
-    background: var(--fundo-hover);
-    border-color: var(--azul);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+
+    background: var(--surface-hover);
+    border-color: var(--border-accent);
+
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.16);
 }
 
-.projeto:hover h4 {
-    color: var(--azul-hover);
+/* Título de cada projeto */
+
+main > section:nth-of-type(3) article > ul > li > strong:first-child {
+    display: block;
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    color: var(--heading);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
 }
 
+/* Links do GitHub dentro dos projetos */
 
-main a {
-    display: inline-block;
-    margin-top: 10px;
+main > section:nth-of-type(3) article > ul > li > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
-    color: var(--azul);
-    font-weight: 600;
+    margin-top: 16px;
+    padding: 8px 12px;
+
+    color: var(--primary);
+    background: var(--primary-soft);
+
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-sm);
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+
     text-decoration: none;
 
     transition:
-        color var(--transicao),
-        text-decoration-color var(--transicao);
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition);
 }
 
-main a:hover {
-    color: var(--azul-hover);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+main > section:nth-of-type(3) article > ul > li > a::after {
+    content: "↗";
+    font-size: 15px;
 }
 
-
-main section:last-child {
-    border-top: 1px solid var(--borda);
-    padding-top: 38px;
+main > section:nth-of-type(3) article > ul > li > a:hover {
+    color: var(--bg);
+    background: var(--primary);
+    border-color: var(--primary);
 }
 
-main section:last-child article {
-    background: var(--fundo-card);
-    border: 1px solid var(--borda);
-    border-radius: var(--raio);
-    padding: 25px;
+/* ========================================
+   7. FORMAÇÃO E METODOLOGIA
+======================================== */
+
+main > section:nth-of-type(4) {
+    border-top: 1px solid var(--border-accent);
 }
 
-em {
-    color: var(--azul);
+main > section:nth-of-type(4) article {
+    padding: 22px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+main > section:nth-of-type(4) article p {
+    color: var(--text-muted);
+}
+
+main > section:nth-of-type(4) article strong {
+    color: var(--heading);
+}
+
+main > section:nth-of-type(4) article em {
+    color: var(--primary);
     font-style: normal;
     font-size: 14px;
+    font-weight: 600;
 }
 
+/* ========================================
+   8. RODAPÉ / REDES SOCIAIS
+======================================== */
+
+body > section:last-child {
+    margin-top: 32px;
+    margin-bottom: 0;
+}
 
 footer ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 12px;
 
-    list-style: none;
     padding: 0;
+    list-style: none;
 }
 
 footer li {
@@ -264,47 +450,124 @@ footer li {
 }
 
 footer a {
-    display: inline-block;
-    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    color: var(--azul);
-    background: var(--fundo-card);
+    min-width: 120px;
+    padding: 11px 18px;
 
-    border: 1px solid var(--borda);
-    border-radius: 8px;
+    color: var(--text);
+    background: var(--surface);
 
-    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    font-size: 14px;
     font-weight: 600;
+    text-decoration: none;
 
     transition:
-        background-color var(--transicao),
-        border-color var(--transicao),
-        transform var(--transicao);
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
 }
 
 footer a:hover {
-    background: var(--fundo-hover);
-    border-color: var(--azul);
+    color: var(--primary);
+    background: var(--surface-hover);
+    border-color: var(--border-accent);
+
     transform: translateY(-2px);
 }
 
-
+/* ========================================
+   9. ACESSIBILIDADE
+======================================== */
 
 a:focus-visible {
-    outline: 2px solid var(--azul-hover);
+    outline: 2px solid var(--primary-hover);
     outline-offset: 4px;
 }
 
+::selection {
+    color: var(--bg);
+    background: var(--primary);
+}
 
+/* Respeita a preferência por menos animações */
 
-@media (max-width: 700px) {
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   10. RESPONSIVIDADE — TABLETS
+======================================== */
+
+@media (max-width: 760px) {
     body {
-        padding: 24px 20px;
+        width: min(100% - 32px, var(--container));
+        padding-top: 20px;
+    }
+
+    header {
+        padding: 34px 28px;
+    }
+
+    header::after {
+        left: 28px;
+    }
+
+    .perfil-container {
+        gap: 24px;
+    }
+
+    .foto-perfil {
+        width: 120px;
+        height: 120px;
+    }
+
+    .info-perfil {
+        padding-left: 20px;
+    }
+
+    main > section,
+    body > section {
+        padding: 26px;
+    }
+
+    main > section:nth-of-type(3) article > ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   11. RESPONSIVIDADE — CELULARES
+======================================== */
+
+@media (max-width: 520px) {
+    body {
+        width: calc(100% - 28px);
+        padding-top: 14px;
+
         font-size: 15px;
     }
 
     header {
-        padding: 30px 0;
+        padding: 30px 22px;
+        border-radius: var(--radius-md);
+    }
+
+    header::after {
+        left: 22px;
     }
 
     .perfil-container {
@@ -314,113 +577,135 @@ a:focus-visible {
     }
 
     .foto-perfil {
-        width: 120px;
-        height: 120px;
-        min-width: 120px;
+        width: 112px;
+        height: 112px;
     }
 
     .info-perfil {
-        padding-left: 18px;
+        width: 100%;
+        padding-left: 16px;
     }
 
     h1 {
         font-size: 32px;
+        letter-spacing: -1px;
         overflow-wrap: anywhere;
     }
 
     h2 {
-        font-size: 19px;
+        font-size: 18px;
+    }
+
+    address p {
+        font-size: 13px;
     }
 
     hr {
-        margin-bottom: 38px;
+        margin: 24px 0 28px;
     }
 
-    section {
-        margin-bottom: 42px;
+    main > section,
+    body > section {
+        padding: 22px 18px;
+        margin-bottom: 18px;
+        border-radius: var(--radius-md);
     }
 
     h3 {
         font-size: 21px;
+        margin-bottom: 18px;
     }
 
-    .projetos {
-        grid-template-columns: 1fr;
+    main > section:first-child p {
+        font-size: 15px;
+        line-height: 1.85;
     }
 
-    .projeto {
+    main > section:nth-of-type(3) article > ul > li {
         padding: 20px;
     }
 
-    main section:last-child article {
-        padding: 20px;
-    }
-}
-
-
-
-@media (max-width: 380px) {
-    body {
-        padding: 20px 14px;
-    }
-
-    h1 {
-        font-size: 28px;
+    main > section:nth-of-type(4) article {
+        padding: 18px;
     }
 
     footer ul {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+    }
+
+    footer a {
+        width: 100%;
     }
 }
 
-
+/* ========================================
+   12. IMPRESSÃO
+======================================== */
 
 @media print {
     :root {
-        --fundo: #ffffff;
-        --fundo-card: #ffffff;
-        --fundo-hover: #ffffff;
-        --texto: #1e293b;
-        --texto-secundario: #475569;
-        --azul: #0369a1;
-        --borda: #cbd5e1;
+        --bg: #ffffff;
+        --bg-secondary: #ffffff;
+        --surface: #ffffff;
+        --surface-hover: #ffffff;
+
+        --primary: #075985;
+        --primary-hover: #075985;
+
+        --text: #1e293b;
+        --text-muted: #475569;
+        --heading: #0f172a;
+
+        --border: #cbd5e1;
+        --border-accent: #94a3b8;
     }
 
     body {
+        width: 100%;
         max-width: none;
         padding: 0;
-        background: #ffffff;
+
         color: #1e293b;
-        font-size: 11pt;
+        background: #ffffff;
+
+        font-size: 10pt;
+    }
+
+    body::before,
+    header::after {
+        display: none;
+    }
+
+    header,
+    main > section,
+    body > section,
+    main > section:nth-of-type(3) article > ul > li,
+    main > section:nth-of-type(4) article {
+        background: #ffffff;
+        box-shadow: none;
+        border-color: #cbd5e1;
     }
 
     header {
-        padding: 20px 0;
+        padding: 24px;
     }
 
     h1,
-    main p,
-    section li {
-        color: #1e293b;
+    h3,
+    main > section:nth-of-type(3) article > ul > li > strong:first-child {
+        color: #0f172a;
     }
 
-    section {
-        margin-bottom: 28px;
+    main > section:nth-of-type(3) article > ul > li {
         break-inside: avoid;
-    }
-
-    .projeto {
-        box-shadow: none;
-        break-inside: avoid;
-    }
-
-    .projeto:hover,
-    footer a:hover {
-        transform: none;
     }
 
     a {
-        color: #0369a1;
+        color: #075985;
+    }
+
+    .foto-perfil {
+        print-color-adjust: exact;
     }
 }
