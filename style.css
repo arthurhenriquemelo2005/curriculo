@@ -1,37 +1,45 @@
-
-/* ========================================
-   1. VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
-======================================== */
+/* ==========================================================
+   Portfólio — Arthur Ribeiro
+   Layout: coluna de perfil fixa (esquerda) + conteúdo (direita)
+   Funciona com o HTML atual, sem precisar mudar classes.
+   Ordem das seções em <main>: 1 Quem eu sou · 2 Tecnologias ·
+   3 Projetos · 4 Formação (os seletores dependem dessa ordem).
+   ========================================================== */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:wght@500;600&display=swap");
 
 :root {
-    --bg: #080d19;
-    --bg-secondary: #0d1526;
-    --surface: #111c30;
-    --surface-hover: #16243b;
+    --bg: #f2f4f6;
+    --surface: #ffffff;
+    --ink: #101c26;
+    --muted: #55636f;
+    --line: #d3dae1;
+    --accent: #0b6e8f;
+    --on-accent: #ffffff;
 
-    --primary: #38bdf8;
-    --primary-hover: #7dd3fc;
-    --primary-soft: rgba(56, 189, 248, 0.10);
-
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
-    --heading: #f8fafc;
-
-    --border: rgba(148, 163, 184, 0.14);
-    --border-accent: rgba(56, 189, 248, 0.35);
-
-    --radius-sm: 8px;
-    --radius-md: 14px;
-    --radius-lg: 22px;
-
-    --container: 1080px;
-    --transition: 220ms ease;
+    --font-text: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    --font-title: "Source Serif 4", Georgia, "Times New Roman", serif;
+    color-scheme: light;
 }
 
-* {
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0d141b;
+        --surface: #141d26;
+        --ink: #e6ecf1;
+        --muted: #93a1ae;
+        --line: #25323e;
+        --accent: #5db8d8;
+        --on-accent: #06141b;
+        color-scheme: dark;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
@@ -39,127 +47,67 @@ html {
 }
 
 body {
-    position: relative;
-    isolation: isolate;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    column-gap: 80px;
+    align-items: start;
 
-    width: min(100% - 48px, var(--container));
-    margin-inline: auto;
-    padding: 36px 0 24px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 72px 32px 96px;
 
-    background: var(--bg);
-    color: var(--text);
-
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: var(--font-text);
     font-size: 16px;
-    line-height: 1.75;
-
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--bg);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
 }
 
-/* Brilho decorativo no fundo */
-
-body::before {
-    content: "";
-    position: fixed;
-    top: -220px;
-    right: -180px;
-    z-index: -1;
-
-    width: 520px;
-    height: 520px;
-
-    background: radial-gradient(
-        circle,
-        rgba(14, 165, 233, 0.10),
-        transparent 70%
-    );
-
-    pointer-events: none;
-}
-
-/* ========================================
-   2. CABEÇALHO / APRESENTAÇÃO
-======================================== */
-
+/* ---------- Coluna de perfil (fixa ao rolar) ---------- */
 header {
-    position: relative;
-    overflow: hidden;
-
-    padding: 48px;
-    background: linear-gradient(
-        135deg,
-        #111e34 0%,
-        #0d1526 65%,
-        #101e33 100%
-    );
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
-}
-
-header::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 48px;
-
-    width: 90px;
-    height: 3px;
-
-    background: var(--primary);
-    border-radius: 0 0 5px 5px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: 72px;
 }
 
 .perfil-container {
     display: flex;
-    align-items: center;
-    gap: 34px;
+    flex-direction: column;
+    gap: 28px;
 }
 
 .foto-perfil {
-    display: block;
-    flex-shrink: 0;
-
-    width: 150px;
-    height: 150px;
-
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1;
     object-fit: cover;
-    object-position: center;
-
-    border-radius: 50%;
-    border: 3px solid var(--primary);
-    padding: 5px;
-
-    background: var(--bg);
-    box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.06);
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--surface);
 }
 
 .info-perfil {
     min-width: 0;
-    padding-left: 28px;
-    border-left: 2px solid var(--border-accent);
 }
 
 h1 {
-    margin-bottom: 8px;
-
-    color: var(--heading);
-    font-size: clamp(32px, 5vw, 46px);
-    font-weight: 750;
-    line-height: 1.15;
-    letter-spacing: -1.5px;
+    font-family: var(--font-title);
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
 }
 
-h2 {
-    margin-bottom: 20px;
-
-    color: var(--primary);
-    font-size: clamp(18px, 2.5vw, 22px);
-    font-weight: 600;
-    line-height: 1.4;
+header h2 {
+    margin: 10px 0 22px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--accent);
 }
 
 address {
@@ -167,545 +115,289 @@ address {
 }
 
 address p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 2;
+    font-size: 0.875rem;
+    line-height: 1.9;
+    color: var(--muted);
     overflow-wrap: anywhere;
 }
 
-/* ========================================
-   3. DIVISÓRIA
-======================================== */
-
 hr {
-    width: 100%;
-    height: 1px;
-
-    margin: 34px 0 44px;
-
-    border: 0;
-    background: linear-gradient(
-        90deg,
-        var(--border-accent),
-        var(--border),
-        transparent
-    );
-}
-
-/* ========================================
-   4. SEÇÕES PRINCIPAIS
-======================================== */
-
-main > section,
-body > section {
-    margin-bottom: 28px;
-    padding: 32px;
-
-    background: rgba(13, 21, 38, 0.82);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-}
-
-h3 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    margin-bottom: 22px;
-
-    color: var(--heading);
-    font-size: 23px;
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: -0.4px;
-}
-
-h3::before {
-    content: "";
-
-    width: 4px;
-    height: 25px;
-    flex-shrink: 0;
-
-    background: var(--primary);
-    border-radius: 5px;
-}
-
-main p {
-    max-width: 850px;
-    color: var(--text-muted);
-}
-
-/* Texto de apresentação */
-
-main > section:first-child p {
-    color: #bdc9da;
-    font-size: 16px;
-    line-height: 1.95;
-}
-
-/* ========================================
-   5. TECNOLOGIAS
-   Usa a segunda seção do main
-======================================== */
-
-main > section:nth-of-type(2) article > ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    padding: 0;
-    list-style: none;
-}
-
-main > section:nth-of-type(2) article > ul > li {
-    margin: 0;
-    padding: 8px 15px;
-
-    color: #c8eaff;
-    background: var(--primary-soft);
-
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius-sm);
-
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-
-    transition:
-        background var(--transition),
-        border-color var(--transition),
-        transform var(--transition);
-}
-
-main > section:nth-of-type(2) article > ul > li:hover {
-    background: rgba(56, 189, 248, 0.16);
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
-
-/* ========================================
-   6. PROJETOS
-   Usa a terceira seção do main
-======================================== */
-
-main > section:nth-of-type(3) article > ul {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-
-    padding: 0;
-    list-style: none;
-}
-
-/* Remove as quebras de linha colocadas
-   entre os itens da lista de projetos */
-
-main > section:nth-of-type(3) article > ul > br {
     display: none;
 }
 
-main > section:nth-of-type(3) article > ul > li {
+/* ---------- Conteúdo ---------- */
+main {
+    grid-column: 2;
+    grid-row: 1;
     min-width: 0;
-    margin: 0;
-    padding: 24px;
-
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.85;
-
-    overflow-wrap: anywhere;
-
-    transition:
-        transform var(--transition),
-        background var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
 }
 
-main > section:nth-of-type(3) article > ul > li:hover {
-    transform: translateY(-4px);
-
-    background: var(--surface-hover);
-    border-color: var(--border-accent);
-
-    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.16);
+body > section {
+    grid-column: 2;
+    grid-row: 2;
 }
 
-/* Título de cada projeto */
-
-main > section:nth-of-type(3) article > ul > li > strong:first-child {
-    display: block;
-    width: 100%;
-
-    margin-bottom: 10px;
-
-    color: var(--heading);
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 1.5;
+section {
+    margin-bottom: 64px;
 }
 
-/* Links do GitHub dentro dos projetos */
-
-main > section:nth-of-type(3) article > ul > li > a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-top: 16px;
-    padding: 8px 12px;
-
-    color: var(--primary);
-    background: var(--primary-soft);
-
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius-sm);
-
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.5;
-
-    text-decoration: none;
-
-    transition:
-        color var(--transition),
-        background var(--transition),
-        border-color var(--transition);
-}
-
-main > section:nth-of-type(3) article > ul > li > a::after {
-    content: "↗";
-    font-size: 15px;
-}
-
-main > section:nth-of-type(3) article > ul > li > a:hover {
-    color: var(--bg);
-    background: var(--primary);
-    border-color: var(--primary);
-}
-
-/* ========================================
-   7. FORMAÇÃO E METODOLOGIA
-======================================== */
-
-main > section:nth-of-type(4) {
-    border-top: 1px solid var(--border-accent);
-}
-
-main > section:nth-of-type(4) article {
-    padding: 22px;
-
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-}
-
-main > section:nth-of-type(4) article p {
-    color: var(--text-muted);
-}
-
-main > section:nth-of-type(4) article strong {
-    color: var(--heading);
-}
-
-main > section:nth-of-type(4) article em {
-    color: var(--primary);
-    font-style: normal;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* ========================================
-   8. RODAPÉ / REDES SOCIAIS
-======================================== */
-
-body > section:last-child {
-    margin-top: 32px;
+body > section {
     margin-bottom: 0;
 }
 
-footer ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+section > h2,
+section > h3 {
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
 
-    padding: 0;
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+main p {
+    max-width: 62ch;
+}
+
+main br {
+    display: none;
+}
+
+ul {
     list-style: none;
 }
 
-footer li {
-    margin: 0;
-    padding: 0;
+main strong {
+    font-weight: 600;
+    color: var(--ink);
+}
+
+/* 1 · Quem eu sou */
+main > section:nth-of-type(1) p {
+    margin-top: 18px;
+    font-size: 1.0625rem;
+}
+
+/* 2 · Tecnologias */
+main > section:nth-of-type(2) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 18px;
+}
+
+main > section:nth-of-type(2) li {
+    padding: 5px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.6;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+/* 3 · Projetos: lista com divisórias.
+   Barra lateral = projeto com código público no GitHub. */
+main > section:nth-of-type(3) li {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--muted);
+}
+
+main > section:nth-of-type(3) li:has(> a) {
+    padding-left: 18px;
+    box-shadow: inset 3px 0 0 var(--accent);
+}
+
+main > section:nth-of-type(3) li > strong:first-child {
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--font-title);
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+}
+
+main a {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-thickness 0.15s ease;
+}
+
+main a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* 4 · Formação */
+main > section:last-child p:not(:last-of-type) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    max-width: none;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0; /* esconde o hífen solto entre o título e o status */
+}
+
+main > section:last-child p:not(:last-of-type) strong {
+    font-size: 1rem;
+}
+
+main > section:last-child br + p {
+    margin-top: 22px;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+em {
+    flex-shrink: 0;
+    padding: 1px 10px;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+}
+
+/* ---------- Onde me encontrar ---------- */
+footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 18px;
 }
 
 footer a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 120px;
-    padding: 11px 18px;
-
-    color: var(--text);
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-
-    font-size: 14px;
-    font-weight: 600;
+    display: inline-block;
+    padding: 9px 20px;
+    font-weight: 500;
+    color: var(--ink);
     text-decoration: none;
-
-    transition:
-        color var(--transition),
-        background var(--transition),
-        border-color var(--transition),
-        transform var(--transition);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 footer a:hover {
-    color: var(--primary);
-    background: var(--surface-hover);
-    border-color: var(--border-accent);
-
-    transform: translateY(-2px);
+    color: var(--on-accent);
+    background: var(--accent);
+    border-color: var(--accent);
 }
-
-/* ========================================
-   9. ACESSIBILIDADE
-======================================== */
 
 a:focus-visible {
-    outline: 2px solid var(--primary-hover);
-    outline-offset: 4px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 
-::selection {
-    color: var(--bg);
-    background: var(--primary);
-}
-
-/* Respeita a preferência por menos animações */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-    }
-}
-
-/* ========================================
-   10. RESPONSIVIDADE — TABLETS
-======================================== */
-
-@media (max-width: 760px) {
-    body {
-        width: min(100% - 32px, var(--container));
-        padding-top: 20px;
-    }
-
+/* ---------- Responsivo ---------- */
+@media (max-height: 640px) {
     header {
-        padding: 34px 28px;
-    }
-
-    header::after {
-        left: 28px;
-    }
-
-    .perfil-container {
-        gap: 24px;
-    }
-
-    .foto-perfil {
-        width: 120px;
-        height: 120px;
-    }
-
-    .info-perfil {
-        padding-left: 20px;
-    }
-
-    main > section,
-    body > section {
-        padding: 26px;
-    }
-
-    main > section:nth-of-type(3) article > ul {
-        grid-template-columns: 1fr;
+        position: static;
     }
 }
 
-/* ========================================
-   11. RESPONSIVIDADE — CELULARES
-======================================== */
-
-@media (max-width: 520px) {
+@media (max-width: 860px) {
     body {
-        width: calc(100% - 28px);
-        padding-top: 14px;
-
+        display: block;
+        padding: 36px 20px 64px;
         font-size: 15px;
     }
 
     header {
-        padding: 30px 22px;
-        border-radius: var(--radius-md);
+        position: static;
+        margin-bottom: 44px;
+        padding-bottom: 36px;
+        border-bottom: 1px solid var(--line);
     }
 
-    header::after {
-        left: 22px;
+    .perfil-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
     }
 
+    .foto-perfil {
+        width: 96px;
+        max-width: 96px;
+        flex-shrink: 0;
+    }
+
+    header h2 {
+        margin-bottom: 14px;
+    }
+
+    section {
+        margin-bottom: 48px;
+    }
+
+    body > section {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 420px) {
     .perfil-container {
         flex-direction: column;
         align-items: flex-start;
-        gap: 24px;
-    }
-
-    .foto-perfil {
-        width: 112px;
-        height: 112px;
-    }
-
-    .info-perfil {
-        width: 100%;
-        padding-left: 16px;
-    }
-
-    h1 {
-        font-size: 32px;
-        letter-spacing: -1px;
-        overflow-wrap: anywhere;
-    }
-
-    h2 {
-        font-size: 18px;
-    }
-
-    address p {
-        font-size: 13px;
-    }
-
-    hr {
-        margin: 24px 0 28px;
-    }
-
-    main > section,
-    body > section {
-        padding: 22px 18px;
-        margin-bottom: 18px;
-        border-radius: var(--radius-md);
-    }
-
-    h3 {
-        font-size: 21px;
-        margin-bottom: 18px;
-    }
-
-    main > section:first-child p {
-        font-size: 15px;
-        line-height: 1.85;
-    }
-
-    main > section:nth-of-type(3) article > ul > li {
-        padding: 20px;
-    }
-
-    main > section:nth-of-type(4) article {
-        padding: 18px;
-    }
-
-    footer ul {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    footer a {
-        width: 100%;
     }
 }
 
-/* ========================================
-   12. IMPRESSÃO
-======================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
+    * {
+        transition: none !important;
+    }
+}
+
+/* ---------- Impressão (PDF do currículo) ---------- */
 @media print {
     :root {
         --bg: #ffffff;
-        --bg-secondary: #ffffff;
         --surface: #ffffff;
-        --surface-hover: #ffffff;
-
-        --primary: #075985;
-        --primary-hover: #075985;
-
-        --text: #1e293b;
-        --text-muted: #475569;
-        --heading: #0f172a;
-
-        --border: #cbd5e1;
-        --border-accent: #94a3b8;
+        --ink: #111111;
+        --muted: #444444;
+        --line: #cccccc;
+        --accent: #0b6e8f;
     }
 
     body {
-        width: 100%;
+        display: block;
         max-width: none;
         padding: 0;
-
-        color: #1e293b;
-        background: #ffffff;
-
-        font-size: 10pt;
-    }
-
-    body::before,
-    header::after {
-        display: none;
-    }
-
-    header,
-    main > section,
-    body > section,
-    main > section:nth-of-type(3) article > ul > li,
-    main > section:nth-of-type(4) article {
-        background: #ffffff;
-        box-shadow: none;
-        border-color: #cbd5e1;
+        font-size: 11pt;
     }
 
     header {
-        padding: 24px;
+        position: static;
+        margin-bottom: 24px;
     }
 
-    h1,
-    h3,
-    main > section:nth-of-type(3) article > ul > li > strong:first-child {
-        color: #0f172a;
-    }
-
-    main > section:nth-of-type(3) article > ul > li {
+    section {
+        margin-bottom: 24px;
         break-inside: avoid;
     }
 
-    a {
-        color: #075985;
-    }
-
-    .foto-perfil {
-        print-color-adjust: exact;
+    footer a {
+        border: none;
+        padding: 0;
     }
 }
