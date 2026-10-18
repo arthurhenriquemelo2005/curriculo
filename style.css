@@ -41,7 +41,6 @@ body {
 }
 
 
-
 header {
     padding: 48px 0 42px;
 }
@@ -110,6 +109,7 @@ hr {
 
     margin-bottom: 55px;
 }
+
 
 
 section {
@@ -210,7 +210,6 @@ section li::marker {
 }
 
 
-
 main a {
     display: inline-block;
     margin-top: 10px;
@@ -231,7 +230,6 @@ main a:hover {
 }
 
 
-
 main section:last-child {
     border-top: 1px solid var(--borda);
     padding-top: 38px;
@@ -249,7 +247,6 @@ em {
     font-style: normal;
     font-size: 14px;
 }
-
 
 
 footer ul {
@@ -297,6 +294,7 @@ a:focus-visible {
     outline: 2px solid var(--azul-hover);
     outline-offset: 4px;
 }
+
 
 
 @media (max-width: 700px) {
