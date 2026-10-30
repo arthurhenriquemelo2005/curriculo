@@ -58,6 +58,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+
 header {
     grid-column: 1;
     grid-row: 1 / span 2;
@@ -118,6 +119,7 @@ hr {
     display: none;
 }
 
+
 main {
     grid-column: 2;
     grid-row: 1;
@@ -168,6 +170,7 @@ main strong {
     color: var(--ink);
 }
 
+
 main > section:nth-of-type(1) p {
     margin-top: 18px;
     font-size: 1.0625rem;
@@ -180,15 +183,10 @@ main > section:nth-of-type(2) ul {
     padding-top: 18px;
 }
 
-main > section:nth-of-type(2) li {
-    padding: 5px 14px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.6;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 6px;
+main > section:nth-of-type(2) img {
+    display: block;
 }
+
 
 main > section:nth-of-type(3) li {
     padding: 22px 0;
@@ -353,6 +351,7 @@ a:focus-visible {
         transition: none !important;
     }
 }
+
 
 @media print {
     :root {
